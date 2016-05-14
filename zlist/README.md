@@ -10,93 +10,72 @@ A linked list is great for storing data when
 the number of items is either unknown (which would be possible with
 an array but should involve reallocation...)
 
-
-
 # Features 
 
 ### Modifiers
 
-`void push\_front(zType const &);`  
-Add a new element to the front of the list.
+`void push_front(zType const &);`  
+Add a new element to the front of the list.  
 Complexity: constant
 
-`void push\_back(zType const &);`  
-Add a new element to the back of the list.
-Complexity : O(1)
+`void push_back(zType const &);`  
+Add a new element to the back of the list.  
+Complexity: constant
 
-<br />
+`void pop_front();`  
+Remove the first element of the list.  
+Complexity: constant
 
-## Remove element :
+`void pop_back();`  
+Remove the last element of the list.  
+Complexity: constant
 
-### void pop\_front();
+`void clear();`  
+Remove all the elements from the list.  
+Complexity: linear
 
-Remove the first element. <br />
-Complexity : O(1)
+### Access
 
-### void pop\_back();
+`zType front() const;`
+Return the first element of the list or null if empty.
+Complexity: constant
 
-Remove the last element. <br />
-Complexity : O(1)
+`zType middle() const`
+Return the middle element of the list or null if empty.
+Complexity: constant
 
-### void erase();
+`zType back() const`
+Return the last element of the list or null if empty.
+Complexity: constant
 
-Remove all the element from the list. This member function iterate
-through the linked list and destroy and the nodes. <br />
-Complexity : O(n)
+### Capacity
 
-<br />
+`size_t size() const;`  
+Return the number of element in the list.  
+Complexity: constant
 
-## Element acces :
+`bool empty() const;`
+Return true if the list is empty.  
+Complexity: constant
 
-### front() middle() tail()
+### Iterators
 
-The 3 methodes returns a reference to the front, middle and tail
-element in the list container. <br />
-Both front() and tail() member function have a constant complexity
-except for middle() which is O(n). <br />
+`Iterator begin();`  
+Return an iterator that points to the first element of the list.  
+Complexity: constant
 
-<br />
+`Iterator end();`  
+Return an iterator that points to the past end of the list which is null.  
+Complexity: constant
 
-## Capacity :
+### Operations
 
-### size\_t size() const;
-
-Return the number of element in the list. <br />
-Complexity : O(1)
-
-### bool empty() const;
-
-Return true if the list is empty. <br />
-Complexity : O(1)
-
-<br />
-
-## Iterators (Forward iterator only. More coming&#x2026;) :
-
-### Iterator begin();
-
-Return an iterator who pointing to the first element of the list. <br />
-Complexity : O(1)
-
-### Iterator end();
-
-Return an iterator who pointing to the past end of the list
-which is null. <br />
-Complexity : O(1)
-
-<br />
-
-## Operations :
-
-### void reverse();
-
+`void reverse();`  
 Reverse all the elements of the list. The head becomes the tail
-and the tail becomes the head.<br />
-Complexity : O(n)
+and the tail becomes the head.  
+Complexity: constant
 
-### void swap(Zlist &instance);
-
+`void swap(Zlist &list);`
 Exchange all the content of the container by the content of
-'instance'. After this call, the content of 'this' are those of
-'instance'. <br />
-Complexity : O(1)
+`list`. After this call, the content of the targeted list become that of the caller.  
+Complexity: constant
