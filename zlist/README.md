@@ -36,16 +36,16 @@ Complexity: linear
 
 ### Access
 
-`zType front() const;`
-Return the first element of the list or null if empty.
+`zType front() const;`  
+Return the first element of the list or null if empty.  
 Complexity: constant
 
-`zType middle() const`
-Return the middle element of the list or null if empty.
+`zType middle() const`  
+Return the middle element of the list or null if empty.  
 Complexity: constant
 
-`zType back() const`
-Return the last element of the list or null if empty.
+`zType back() const`  
+Return the last element of the list or null if empty.  
 Complexity: constant
 
 ### Capacity
