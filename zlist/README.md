@@ -21,7 +21,7 @@ Add a new element to the front of the list.
 Complexity: constant
 
 `void push\_back(zType const &);`
-Add a new element to the back of the list. 
+Add a new element to the back of the list.
 Complexity : O(1)
 
 <br />
