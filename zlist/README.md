@@ -16,11 +16,11 @@ an array but should involve reallocation...)
 
 ### Modifiers
 
-`void push\_front(zType const &);`
+`void push\_front(zType const &);`  
 Add a new element to the front of the list.
 Complexity: constant
 
-`void push\_back(zType const &);`
+`void push\_back(zType const &);`  
 Add a new element to the back of the list.
 Complexity : O(1)
 
