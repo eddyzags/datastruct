@@ -30,7 +30,12 @@ Complexity: constant
 Remove the last element of the list.  
 Complexity: constant
 
-`void clear();`  
+`void erase(const zType &data);`  
+`void erase(const Zlist<zType>::Iterator &ite)`  
+Remove a specific element from the list.  
+Complexity: linear
+
+`void clear()`  
 Remove all the elements from the list.  
 Complexity: linear
 
@@ -44,7 +49,7 @@ Complexity: constant
 Return the middle element of the list or null if empty.  
 Complexity: constant
 
-`zType back() const`  
+`zType tail() const`  
 Return the last element of the list or null if empty.  
 Complexity: constant
 
@@ -54,7 +59,7 @@ Complexity: constant
 Return the number of element in the list.  
 Complexity: constant
 
-`bool empty() const;`
+`bool empty() const;`  
 Return true if the list is empty.  
 Complexity: constant
 
@@ -75,7 +80,7 @@ Reverse all the elements of the list. The head becomes the tail
 and the tail becomes the head.  
 Complexity: constant
 
-`void swap(Zlist &list);`
+`void swap(Zlist &list);`  
 Exchange all the content of the container by the content of
 `list`. After this call, the content of the targeted list become that of the caller.  
 Complexity: constant
