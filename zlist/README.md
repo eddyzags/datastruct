@@ -4,29 +4,24 @@
 
 Zlist is a class that implements a linked list. A list is an
 ordered set of data elements, each containing a link to its
-successor (and sometimes its predecessor).
-They are multiple ways to design a linked list in memory. However,
-the Zlist use a list. A linked list is great for storing data when
+successor (and sometimes its predecessor). They are multiple ways
+to design a linked list in memory. However, the Zlist use a list.
+A linked list is great for storing data when
 the number of items is either unknown (which would be possible with
 an array but should involve reallocation...)
 
 
 
-# Features (Member functions)
+# Features 
 
-## Modifiers :
+### Modifiers
 
-### void push\_front(zType const &);
+`void push\_front(zType const &);`
+Add a new element to the front of the list.
+Complexity: constant
 
-Add a new element at the front of the list. The class use his
-member variable phead\_ to push a new item which gives us a constant
-complexity.<br />
-Complexity : O(1)
-
-### void push\_back(zType const &);
-
-Add a new element a the back of the list. The class use his member
-variable ptail\_ and as push\_front, the complexity is constant. <br />
+`void push\_back(zType const &);`
+Add a new element to the back of the list. 
 Complexity : O(1)
 
 <br />
