@@ -1,26 +1,22 @@
 // Author: zagabe.ed@gmail.com (Eddy Zagabe)
 //
-// This is an implementation of a linked list with
-// several features to help you manipulate it.
-// A linked list is a data structure that can hold an arbitrary number
-// of data item.
-// This class use a list for his data storage representation. (See
-// struct DataList). A template is used for more flexibility
+// Zlist implementation which is a linked list. A data structure
+// that can hold an arbitrary number of data item.
 
 #ifndef ZLIST_HH_
 #define ZLIST_HH_
 
 #include <string>  // for size_t
 
-// Implementation of the Zlist class (Linked list)
+// Zlist class definition
 template <typename zType>
 class Zlist {
  private:
-  // Representation of the nodes in the list.
-  struct DataList {
+  // Definition of a node
+  struct Node {
     zType data;
-    struct DataList *next;
-    struct DataList *prev;
+    struct Node *next;
+    struct Node *prev;
   };
   
  public:
@@ -29,8 +25,8 @@ class Zlist {
 
   // Desctructor
   virtual ~Zlist() {
-    struct DataList *prev = nullptr;
-    struct DataList *curr = phead_;
+    struct Node *prev = nullptr;
+    struct Node *curr = phead_;
     
     while (curr) {
       prev = curr;
@@ -67,30 +63,30 @@ class Zlist {
   void pop_back();
 
   // Remove on element from the list
-  void erase(const zType &data); //TODO(eddyzags): Replace erase by clear
+  void erase(const zType &data);
   
   // Remove all the elements from the list
-  void clean();
+  void clear();
 
   // Reverse all the elements of the list. The head becomes the tail
   // and the tail becomes the head.
   void reverse();
 
   // Swap two instances of Zlist
-  void swap(Zlist &instance); //TODO(eddyzags): change instance by list
+  void swap(Zlist &list);
 
   // Implementation of a class Iterator who helps you iterate through
   // the list. (Forward iteratation)
   class Iterator {
    public:
     // Constructor
-    Iterator(struct DataList *node) : node_(node) {}
+    Iterator(struct Node *node) : node_(node) {}
 
     // Desctructor
     ~Iterator() {}
 
     // Return a reference to the node
-    struct DataList *getNode() { return node_; }
+    struct Node *getNode() { return node_; }
     
     // Overload operator= for the iterator
     Iterator &operator=(const Iterator &other) {
@@ -121,7 +117,7 @@ class Zlist {
 
    private:
     // Iterator's pointer who iterate through the linked list
-    struct DataList *node_;
+    struct Node *node_;
   };
 
   // Initializes and return an iterator pointing the head of the list
@@ -138,13 +134,13 @@ class Zlist {
   int count_;
 
   // Pointer to the head of the list
-  struct DataList *phead_;
+  struct Node *phead_;
 
   // Pointer to the tail of the list
-  struct DataList *ptail_;
+  struct Node *ptail_;
 
   // Delete a node and decrement the counter
-  void delete_node(int pos, struct DataList *prev, struct DataList *curr) {
+  void delete_node(int pos, struct Node *prev, struct Node *curr) {
     if (pos == 0) phead_ = curr->next;
     if (pos == count_ - 1) ptail_ = prev;
     prev->next = curr->next;
@@ -160,7 +156,7 @@ class Zlist {
 // Add an element to the front of the list
 template <typename zType>
 void Zlist<zType>::push_front(zType const &item) {
-  struct DataList *node = new DataList;
+  struct Node *node = new Node;
 
   node->data = item;
   node->next = phead_;
@@ -174,7 +170,7 @@ void Zlist<zType>::push_front(zType const &item) {
 // Add an element to the back of the list
 template <typename zType>
 void Zlist<zType>::push_back(zType const &item) {
-  struct DataList *node = new DataList;
+  struct Node *node = new Node;
 
   node->data = item;
   node->next = nullptr;
@@ -192,7 +188,7 @@ void Zlist<zType>::push_back(zType const &item) {
 // Remove the first element of the list
 template <typename zType>
 void Zlist<zType>::pop_front() {
-  struct DataList *tmp;
+  struct Node *tmp;
 
   if (count_ <= 0 || !phead_) return;
   tmp = phead_;
@@ -206,7 +202,7 @@ void Zlist<zType>::pop_front() {
 // Remove the last element of the list
 template <typename zType>
 void Zlist<zType>::pop_back() {
-  struct DataList *tmp;
+  struct Node *tmp;
 
   if (count_ <= 0 || !phead_) return;
   tmp = ptail_;
@@ -220,8 +216,8 @@ void Zlist<zType>::pop_back() {
 // Remove one element from the list specified by the index
 template <typename zType>
 void Zlist<zType>::erase(const Zlist<zType>::Iterator &ite) {
-  struct DataList *prev = phead_;
-  struct DataList *curr = phead_;
+  struct Node *prev = phead_;
+  struct Node *curr = phead_;
 
   if (!phead_) return;
   for (int c = 0; curr; curr = curr->next, c++) {
@@ -233,8 +229,8 @@ void Zlist<zType>::erase(const Zlist<zType>::Iterator &ite) {
 // Remove one element from the list
 template <typename zType>
 void Zlist<zType>::erase(const zType &data) {
-  struct DataList *prev = phead_;
-  struct DataList *curr = phead_;
+  struct Node *prev = phead_;
+  struct Node *curr = phead_;
 
   for (; curr; curr = curr->next) {
     if (curr->data == data)
@@ -244,10 +240,10 @@ void Zlist<zType>::erase(const zType &data) {
 
 // Remove all the elements of the list
 template <typename zType>
-void Zlist<zType>::clean() {
-  struct DataList *prev = nullptr;
+void Zlist<zType>::clear() {
+  struct Node *prev = nullptr;
 
-  for (struct DataList *tmp = phead_; tmp; tmp = tmp->next) {
+  for (struct Node *tmp = phead_; tmp; tmp = tmp->next) {
     prev = tmp;
     tmp = tmp->next;
     delete prev;
@@ -260,10 +256,10 @@ void Zlist<zType>::clean() {
 // Access to the middle element of the list
 template <class zType>
 zType Zlist<zType>::middle() const {
-  struct DataList *mid = phead_;
+  struct Node *mid = phead_;
   int count = 0;
 
-  for (struct DataList *tmp = phead_; tmp; tmp = tmp->next) {
+  for (struct Node *tmp = phead_; tmp; tmp = tmp->next) {
     if (count & 1) mid = mid->next;
     count++;
   }
@@ -273,12 +269,12 @@ zType Zlist<zType>::middle() const {
 // Reverse the elements of the list
 template <class zType>
 void Zlist<zType>::reverse() {
-  struct DataList *next;
-  struct DataList *prev = nullptr;
+  struct Node *next;
+  struct Node *prev = nullptr;
 
   if (!phead_ || count_ <= 1) return;
   ptail_ = phead_;
-  for (struct DataList *current = phead_; current; current = next) {
+  for (struct Node *current = phead_; current; current = next) {
     next = current->next;
     current->next = prev;
     prev = current;
@@ -288,17 +284,17 @@ void Zlist<zType>::reverse() {
 
 // Swap two instances of Zlist
 template <class zType>
-void Zlist<zType>::swap(Zlist &instance) {
-  struct DataList *pheadTmp;
-  struct DataList *ptailTmp;
+void Zlist<zType>::swap(Zlist &list) {
+  struct Node *pheadTmp;
+  struct Node *ptailTmp;
   int count;
 
-  pheadTmp = instance.phead_;
-  ptailTmp = instance.ptail_;
-  count = instance.count_;
-  instance.phead_ = phead_;
-  instance.ptail_ = ptail_;
-  instance.count_ = count_;
+  pheadTmp = list.phead_;
+  ptailTmp = list.ptail_;
+  count = list.count_;
+  list.phead_ = phead_;
+  list.ptail_ = ptail_;
+  list.count_ = count_;
   phead_ = pheadTmp;
   ptail_ = ptailTmp;
   count_ = count;
